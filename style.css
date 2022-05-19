@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #eee;
+}
+
+a:hover,
+a:focus {
+    text-decoration:none;
+}
+
+.fa {
+    color: #FFF;
+}
+
+.box-top {
+    padding: 60px 0px;
+    background: #dedede;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.box-top.instagram {
+    background: linear-gradient(45deg, #f2935b, #6f49c0);
+}
+
+.box-top.twitter {
+    background: linear-gradient(45deg, #cae1f3, #55aded);
+}
+
+.box-top.facebook {
+    background: linear-gradient(45deg, #95a2c1, #3b579d);
+}
+
+.box-bottom {
+    background: #FFF;
+    padding: 30px 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.box-bottom .box-text {
+    padding: 10px 0px; 
+}
+
+.box-bottom .instagram-title {
+    font-size: 20px;  
+    font-weight: 600;
+    background: linear-gradient(45deg, #f2935b, #6f49c0);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+}
+
+.box-bottom .twitter-title {
+    font-size: 20px;  
+    font-weight: 600;
+    background: linear-gradient(45deg, #cae1f3, #55aded);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+}
+
+.box-bottom .facebook-title {
+    font-size: 20px; 
+    font-weight: 600;
+    color: #428bca;
+}
+ 
