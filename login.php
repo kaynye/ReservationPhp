@@ -1,5 +1,6 @@
 <?php
  require('connect.php');
+ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +34,15 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+								<form id="login-form" action="/loginUser.php" method="post" role="form" style="display: block;">
+									<?php 
+										if (isset($_GET["error"])){
+											if ($_GET["error"]=1){
+												echo '<h3 class="text-center text-danger">Utilisateur ou mot de passe incorrect</h3>';
+											}
+										}
+									?>
+									
 									<div class="form-group">
 										<input type="text" name="email" id="emailConnect" tabindex="1" class="form-control" placeholder="email" value="">
 									</div>

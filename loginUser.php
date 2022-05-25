@@ -1,20 +1,37 @@
 <?php
     require('connect.php');
 
-    if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['adresse'])  ){
-        $insertion=$connexion->prepare('INSERT INTO client ( `nom`, `prenom` ,`email`, `adresse`, `password`) VALUES(:NOM, :PRENOM, :MAIL, :ADRESSE, :PASSWORD)');
+    if(isset($_POST['email']) && isset($_POST['password']) ){
+        echo "je te log";
+        echo md5($_POST['password']);
+        $insertion=$connexion->prepare('SELECT id,nom,prenom from client where email= :MAIL  and password= :PASSWORD');
                     
-        $insertion->bindValue(':NOM',$_POST['nom']);
-        $insertion->bindValue(':PRENOM',$_POST['prenom']);
         $insertion->bindValue(':MAIL',$_POST['email']);
-        $insertion->bindValue(':ADRESSE',$_POST['adresse']);
         $insertion->bindValue(':PASSWORD', md5($_POST['password']));
+        
+        $insertion->execute();
 
-        $verif=$insertion->execute();
-        echo ($verif);
-        if($verif){
-            header("Location: login.php");
+        $result = $insertion->fetch();
+        // $user = $result->fetch_assoc();
+        // var_dump($result);
+        print_r ($result);
+        if ( $result){
+            session_start();
+            $_SESSION["id"]=$result['id'];
+            $_SESSION["nom"]=$result['nom'];
+            $_SESSION["prenom"]=$result['prenom'];
+            if ($_SESSION['reservation']){
+                header("Location: confirmation.php");
+            }else{
+                header("Location: maRecherche.php");
+            }
+           
+        }else{
+            header("Location: login.php?error=1");
         }
+        // if($verif){
+        //     header("Location: login.php");
+        // }
          exit();
 
     }else{

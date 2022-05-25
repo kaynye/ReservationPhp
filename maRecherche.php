@@ -3,6 +3,8 @@
 
  session_start();
 
+//  var_dump($_POST);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,9 +37,18 @@
         }
       
       ?>
-
+        
+        <!-- <p class="float-right">This text is on the right</p> -->
+        
       </ul>
     </div>
+    <?php 
+        if (isset($_SESSION["id"])){
+            echo "<div class='justify-content-end text-white'>$_SESSION[prenom] $_SESSION[nom] <a href='/logout.php'><i class='fa fa-sign-out ml-4' aria-hidden='true'></i> </a></div>";
+        }
+      
+      ?>
+    
   </div>
 </nav>
 
@@ -90,7 +101,7 @@
                                     <div class='box-text'>
                                         $row[Tarif] €
                                         <br>
-                                        <form action='validation.php' method='post'>
+                                        <form action='confirmation.php' method='post'>
                                             <input type='hidden' name='id' value='$row[id]'>
                                             <button type='submit' name='ok' class='btn btn-secondary'>Reserver</button>
                                         </form>

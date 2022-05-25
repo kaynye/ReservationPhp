@@ -2,14 +2,18 @@
  require('connect.php');
 session_start();
 
- if(isset($_POST['id']) && isset($_POST['valider'])){
-    $id=$_POST['id'];
+ if(isset($_POST['id']) && isset($_POST['ok'])){
+    if (!isset($_SESSION["id"])){
+        $_SESSION['reservation']=$_POST['id'];
+        header("Location: login.php");
+     }
+     $id = $_POST["id"];
      
  }else{
-    if (isset($_SESSION["reservation"])){
-        header("Location: confirmation.php");
-     }else{
+    if (!isset($_SESSION["reservation"])){
         header("Location: index.php");
+     }else{
+        $id = $_SESSION["reservation"];
      }
  }
 ?>
@@ -19,7 +23,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validation</title>
+    <title>Recapitulitif de ommande </title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -37,7 +41,6 @@ session_start();
 ?>
 
 <div style="width:70%;margin-right:auto; margin-left:auto;margin-top: 60px;">
-<h3 class="text-success text-center">Votre commande a bien eté prise en compte</h3>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -56,7 +59,10 @@ session_start();
     </tr>
   </tbody>
 </table>
-<a href="/" ><button class="btn btn-primary">Retourner à l'acceuil</button></a>
+<form action="validation.php" method="POST">
+  <input type='hidden' name='id' value='<?php echo $id;?>'>
+  <button type='submit' name='valider' class="btn btn-info float-right"> Valider la commande</button>
+</form>
 
 </div>
 
